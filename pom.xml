@@ -52,7 +52,7 @@
         <relativePath/>
     </parent>
 
-    <artifactId>Loadium</artifactId>
+    <artifactId>loadium</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>hpi</packaging>
 
@@ -172,7 +172,6 @@
 
 
     </dependencies>
-
 
     <repositories>
         <repository>
