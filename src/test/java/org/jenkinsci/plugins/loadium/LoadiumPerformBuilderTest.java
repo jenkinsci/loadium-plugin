@@ -1,4 +1,4 @@
-package org.jenkinsci.plugins.sample;
+package org.jenkinsci.plugins.loadium;
 
 import hudson.model.FreeStyleBuild;
 import hudson.model.FreeStyleProject;

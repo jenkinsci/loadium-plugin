@@ -1,4 +1,4 @@
-package org.jenkinsci.plugins.sample;
+package org.jenkinsci.plugins.loadium;
 
 
 import org.apache.commons.io.FileUtils;

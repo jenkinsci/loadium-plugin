@@ -1,4 +1,4 @@
-package org.jenkinsci.plugins.sample.enums;
+package org.jenkinsci.plugins.loadium.enums;
 
 /**
  * Created by furkanbrgl on 17/11/2017.

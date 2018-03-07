@@ -1,7 +1,7 @@
-package org.jenkinsci.plugins.sample.model;
+package org.jenkinsci.plugins.loadium.model;
 
 
-import org.jenkinsci.plugins.sample.enums.JMeterSessionStatus;
+import org.jenkinsci.plugins.loadium.enums.JMeterSessionStatus;
 
 /**
  * Created by furkanbrgl on 20/11/2017.

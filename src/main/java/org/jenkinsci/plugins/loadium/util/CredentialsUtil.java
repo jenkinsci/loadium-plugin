@@ -1,11 +1,11 @@
-package org.jenkinsci.plugins.sample.util;
+package org.jenkinsci.plugins.loadium.util;
 
 import com.cloudbees.plugins.credentials.CredentialsProvider;
 import com.cloudbees.plugins.credentials.CredentialsScope;
 import hudson.model.Item;
 import hudson.security.ACL;
-import org.jenkinsci.plugins.sample.LoadiumCredentials;
-import org.jenkinsci.plugins.sample.model.CredentialModel;
+import org.jenkinsci.plugins.loadium.LoadiumCredentials;
+import org.jenkinsci.plugins.loadium.model.CredentialModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;

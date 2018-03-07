@@ -1,9 +1,9 @@
-package org.jenkinsci.plugins.sample.util;
+package org.jenkinsci.plugins.loadium.util;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
-import org.jenkinsci.plugins.sample.services.AuthService;
+import org.jenkinsci.plugins.loadium.services.AuthService;
 
 import static io.restassured.RestAssured.given;
 

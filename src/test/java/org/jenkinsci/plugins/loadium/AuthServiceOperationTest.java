@@ -1,7 +1,7 @@
-package org.jenkinsci.plugins.sample;
+package org.jenkinsci.plugins.loadium;
 
-import org.jenkinsci.plugins.sample.services.AuthService;
-import org.jenkinsci.plugins.sample.util.RestUtil;
+import org.jenkinsci.plugins.loadium.services.AuthService;
+import org.jenkinsci.plugins.loadium.util.RestUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

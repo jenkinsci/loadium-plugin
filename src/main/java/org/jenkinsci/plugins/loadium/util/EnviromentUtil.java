@@ -1,4 +1,4 @@
-package org.jenkinsci.plugins.sample.util;
+package org.jenkinsci.plugins.loadium.util;
 
 import org.apache.log4j.Logger;
 

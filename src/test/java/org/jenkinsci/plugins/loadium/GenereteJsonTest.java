@@ -1,14 +1,14 @@
-package org.jenkinsci.plugins.sample;
+package org.jenkinsci.plugins.loadium;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.jenkinsci.plugins.sample.enums.JMeterSessionStatus;
-import org.jenkinsci.plugins.sample.model.JMeterSessionBasicDetailsDTO;
-import org.jenkinsci.plugins.sample.model.JMeterTestBasicDetailsDTO;
-import org.jenkinsci.plugins.sample.model.wrapper.DefaultResponse;
-import org.jenkinsci.plugins.sample.model.wrapper.GetBasicTestResponse;
-import org.jenkinsci.plugins.sample.model.wrapper.JMeterRunningSessionResponse;
-import org.jenkinsci.plugins.sample.model.wrapper.StartSessionResponse;
+import org.jenkinsci.plugins.loadium.enums.JMeterSessionStatus;
+import org.jenkinsci.plugins.loadium.model.JMeterSessionBasicDetailsDTO;
+import org.jenkinsci.plugins.loadium.model.JMeterTestBasicDetailsDTO;
+import org.jenkinsci.plugins.loadium.model.wrapper.DefaultResponse;
+import org.jenkinsci.plugins.loadium.model.wrapper.GetBasicTestResponse;
+import org.jenkinsci.plugins.loadium.model.wrapper.JMeterRunningSessionResponse;
+import org.jenkinsci.plugins.loadium.model.wrapper.StartSessionResponse;
 import org.junit.Test;
 
 import java.util.ArrayList;

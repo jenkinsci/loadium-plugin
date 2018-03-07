@@ -1,7 +1,7 @@
-package org.jenkinsci.plugins.sample.services;
+package org.jenkinsci.plugins.loadium.services;
 
 import org.apache.log4j.Logger;
-import org.jenkinsci.plugins.sample.util.RestUtil;
+import org.jenkinsci.plugins.loadium.util.RestUtil;
 
 /**
  * Created by furkanbrgl on 13/11/2017.

@@ -1,12 +1,12 @@
-package org.jenkinsci.plugins.sample.util;
+package org.jenkinsci.plugins.loadium.util;
 
 import hudson.FilePath;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.util.log.StdErrLog;
-import org.jenkinsci.plugins.sample.enums.JMeterSessionStatus;
-import org.jenkinsci.plugins.sample.model.wrapper.DefaultResponse;
-import org.jenkinsci.plugins.sample.model.wrapper.JMeterRunningSessionResponse;
-import org.jenkinsci.plugins.sample.services.LoadiumService;
+import org.jenkinsci.plugins.loadium.enums.JMeterSessionStatus;
+import org.jenkinsci.plugins.loadium.model.wrapper.DefaultResponse;
+import org.jenkinsci.plugins.loadium.model.wrapper.JMeterRunningSessionResponse;
+import org.jenkinsci.plugins.loadium.services.LoadiumService;
 
 /**
  * Created by furkanbrgl on 17/11/2017.

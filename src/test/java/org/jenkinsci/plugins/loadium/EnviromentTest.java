@@ -1,8 +1,8 @@
-package org.jenkinsci.plugins.sample;
+package org.jenkinsci.plugins.loadium;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
-import org.jenkinsci.plugins.sample.util.EnviromentUtil;
+import org.jenkinsci.plugins.loadium.util.EnviromentUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;

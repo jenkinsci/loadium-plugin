@@ -1,6 +1,6 @@
-package org.jenkinsci.plugins.sample.model.wrapper;
+package org.jenkinsci.plugins.loadium.model.wrapper;
 
-import org.jenkinsci.plugins.sample.model.JMeterSessionBasicDetailsDTO;
+import org.jenkinsci.plugins.loadium.model.JMeterSessionBasicDetailsDTO;
 
 /**
  * Created by furkanbrgl on 20/11/2017.

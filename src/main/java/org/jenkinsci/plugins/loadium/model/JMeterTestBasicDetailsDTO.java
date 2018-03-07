@@ -1,4 +1,4 @@
-package org.jenkinsci.plugins.sample.model;
+package org.jenkinsci.plugins.loadium.model;
 
 import java.util.Date;
 

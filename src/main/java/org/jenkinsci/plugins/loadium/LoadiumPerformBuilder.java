@@ -1,4 +1,4 @@
-package org.jenkinsci.plugins.sample;
+package org.jenkinsci.plugins.loadium;
 
 import com.cloudbees.plugins.credentials.CredentialsProvider;
 import com.cloudbees.plugins.credentials.CredentialsScope;
@@ -16,11 +16,11 @@ import hudson.util.Secret;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jenkinsci.Symbol;
-import org.jenkinsci.plugins.sample.model.CredentialModel;
-import org.jenkinsci.plugins.sample.model.JMeterTestBasicDetailsDTO;
-import org.jenkinsci.plugins.sample.services.AuthService;
-import org.jenkinsci.plugins.sample.services.LoadiumService;
-import org.jenkinsci.plugins.sample.util.CredentialsUtil;
+import org.jenkinsci.plugins.loadium.model.CredentialModel;
+import org.jenkinsci.plugins.loadium.model.JMeterTestBasicDetailsDTO;
+import org.jenkinsci.plugins.loadium.services.AuthService;
+import org.jenkinsci.plugins.loadium.services.LoadiumService;
+import org.jenkinsci.plugins.loadium.util.CredentialsUtil;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.Stapler;

@@ -1,6 +1,6 @@
-package org.jenkinsci.plugins.sample.model.wrapper;
+package org.jenkinsci.plugins.loadium.model.wrapper;
 
-import org.jenkinsci.plugins.sample.model.JMeterTestBasicDetailsDTO;
+import org.jenkinsci.plugins.loadium.model.JMeterTestBasicDetailsDTO;
 
 import java.util.List;
 

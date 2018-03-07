@@ -1,4 +1,4 @@
-package org.jenkinsci.plugins.sample.model.wrapper;
+package org.jenkinsci.plugins.loadium.model.wrapper;
 
 public class DefaultResponse {
 

@@ -1,4 +1,4 @@
-package org.jenkinsci.plugins.sample;
+package org.jenkinsci.plugins.loadium;
 
 import com.cloudbees.plugins.credentials.CredentialsScope;
 import com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials;
@@ -8,9 +8,7 @@ import hudson.Extension;
 import hudson.util.FormValidation;
 import hudson.util.Secret;
 import net.sf.json.JSONException;
-import org.apache.log4j.Logger;
-import org.jenkinsci.plugins.sample.services.AuthService;
-import org.jenkinsci.plugins.sample.services.LoadiumService;
+import org.jenkinsci.plugins.loadium.services.AuthService;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 

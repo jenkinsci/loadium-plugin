@@ -1,12 +1,12 @@
-package org.jenkinsci.plugins.sample;
+package org.jenkinsci.plugins.loadium;
 
 import org.apache.log4j.Logger;
-import org.jenkinsci.plugins.sample.model.JMeterTestBasicDetailsDTO;
-import org.jenkinsci.plugins.sample.model.wrapper.DefaultResponse;
-import org.jenkinsci.plugins.sample.model.wrapper.JMeterRunningSessionResponse;
-import org.jenkinsci.plugins.sample.model.wrapper.StartSessionResponse;
-import org.jenkinsci.plugins.sample.services.LoadiumService;
-import org.jenkinsci.plugins.sample.util.RestUtil;
+import org.jenkinsci.plugins.loadium.model.JMeterTestBasicDetailsDTO;
+import org.jenkinsci.plugins.loadium.model.wrapper.DefaultResponse;
+import org.jenkinsci.plugins.loadium.model.wrapper.JMeterRunningSessionResponse;
+import org.jenkinsci.plugins.loadium.model.wrapper.StartSessionResponse;
+import org.jenkinsci.plugins.loadium.services.LoadiumService;
+import org.jenkinsci.plugins.loadium.util.RestUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
