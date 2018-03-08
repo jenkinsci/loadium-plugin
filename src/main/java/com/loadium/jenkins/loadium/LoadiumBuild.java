@@ -1,17 +1,17 @@
-package org.jenkinsci.plugins.loadium;
+package com.loadium.jenkins.loadium;
 
+import com.loadium.jenkins.loadium.enums.JMeterSessionStatus;
+import com.loadium.jenkins.loadium.model.CredentialModel;
+import com.loadium.jenkins.loadium.model.wrapper.JMeterRunningSessionResponse;
+import com.loadium.jenkins.loadium.model.wrapper.StartSessionResponse;
+import com.loadium.jenkins.loadium.services.LoadiumService;
+import com.loadium.jenkins.loadium.util.EnviromentUtil;
+import com.loadium.jenkins.loadium.util.ProcessUtil;
 import hudson.model.BuildListener;
 import hudson.model.Result;
 import hudson.model.TaskListener;
 import hudson.remoting.Callable;
 //import org.eclipse.jetty.util.log.StdErrLog;
-import org.jenkinsci.plugins.loadium.enums.JMeterSessionStatus;
-import org.jenkinsci.plugins.loadium.model.CredentialModel;
-import org.jenkinsci.plugins.loadium.model.wrapper.JMeterRunningSessionResponse;
-import org.jenkinsci.plugins.loadium.model.wrapper.StartSessionResponse;
-import org.jenkinsci.plugins.loadium.services.LoadiumService;
-import org.jenkinsci.plugins.loadium.util.EnviromentUtil;
-import org.jenkinsci.plugins.loadium.util.ProcessUtil;
 import org.jenkinsci.remoting.RoleChecker;
 
 import java.io.PrintStream;

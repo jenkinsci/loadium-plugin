@@ -1,10 +1,10 @@
-package org.jenkinsci.plugins.loadium.util;
+package com.loadium.jenkins.loadium.util;
 
+import com.loadium.jenkins.loadium.enums.JMeterSessionStatus;
+import com.loadium.jenkins.loadium.model.wrapper.JMeterRunningSessionResponse;
+import com.loadium.jenkins.loadium.services.LoadiumService;
 import hudson.FilePath;
 import hudson.model.BuildListener;
-import org.jenkinsci.plugins.loadium.enums.JMeterSessionStatus;
-import org.jenkinsci.plugins.loadium.model.wrapper.JMeterRunningSessionResponse;
-import org.jenkinsci.plugins.loadium.services.LoadiumService;
 
 import java.util.logging.Logger;
 
