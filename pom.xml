@@ -51,6 +51,7 @@
         <relativePath />
     </parent>
 
+    <groupId>com.loadium.jenkins</groupId>
     <artifactId>loadium</artifactId>
     <version>1.0</version>
     <packaging>hpi</packaging>
