@@ -38,8 +38,8 @@ public class LoadiumPerformBuilder extends Builder {
     private final String testId;
     private final String credentialsId;
 
-    public static AuthService authService = AuthService.getInstance();
-    public static LoadiumService loadiumService = LoadiumService.getInstance();
+    public final static AuthService authService = AuthService.getInstance();
+    public final static LoadiumService loadiumService = LoadiumService.getInstance();
 
     private final static Logger LOGGER = Logger.getLogger(LoadiumPerformBuilder.class);
 

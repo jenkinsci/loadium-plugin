@@ -28,7 +28,7 @@ public class LoadiumBuild implements Callable<Result, Exception> {
     private CredentialModel credentialModel;
     private String testId = "";
     private BuildListener listener = null;
-    public static LoadiumService loadiumService = LoadiumService.getInstance();
+    public final static LoadiumService loadiumService = LoadiumService.getInstance();
 
     private final static int DELAY = 30000;
     private final static int LastPrint = 0;

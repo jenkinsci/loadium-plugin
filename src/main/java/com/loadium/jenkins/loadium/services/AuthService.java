@@ -31,9 +31,13 @@ public class AuthService {
     public String getAuthToken() throws Exception {
 
         rest = new RestUtil();
-        accessToken = rest.getAuthToken(this.username, this.password);
+        setToken(rest.getAuthToken(this.username, this.password));
 
         return accessToken;
+    }
+
+    private synchronized static void setToken(String token) {
+        accessToken = token;
     }
 
     public boolean authTokenValidation(String username, String password) {
