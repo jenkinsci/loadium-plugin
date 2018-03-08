@@ -2,11 +2,13 @@ package com.loadium.jenkins.loadium.model;
 
 import hudson.util.Secret;
 
+import java.io.Serializable;
+
 
 /**
  * Created by furkanbrgl on 16/11/2017.
  */
-public class CredentialModel {
+public class CredentialModel implements Serializable {
 
     private String username = null;
     private Secret password = null;

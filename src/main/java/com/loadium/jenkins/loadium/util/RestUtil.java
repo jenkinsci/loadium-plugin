@@ -2,6 +2,7 @@ package com.loadium.jenkins.loadium.util;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.log4j.Logger;
 import com.loadium.jenkins.loadium.services.AuthService;
 
@@ -34,6 +35,9 @@ public class RestUtil {
             throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()));
         }
 
+        if(response == null)
+            throw new NullPointerException("Response is null");
+        else
         return response.getBody().prettyPrint();
     }
 
@@ -55,7 +59,10 @@ public class RestUtil {
             throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()));
         }
 
-        return response.getBody().prettyPrint();
+        if(response == null)
+            throw new NullPointerException("Response is null");
+        else
+            return response.getBody().prettyPrint();
     }
 
     public String deleteResourceRestCall(String url, Object o) throws Exception {

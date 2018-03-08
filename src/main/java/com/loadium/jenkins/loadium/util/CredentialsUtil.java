@@ -26,7 +26,7 @@ public class CredentialsUtil {
     public static List<LoadiumCredentials> getCredentials(Object scope) {
 
         List<LoadiumCredentials> result = new ArrayList<LoadiumCredentials>();
-        Set<String> addedCredentials = new HashSet<String>();
+        Set<String> addedCredentials = new HashSet<>();
 
         Item item = scope instanceof Item ? (Item) scope : null;
         StringBuilder id = new StringBuilder();
