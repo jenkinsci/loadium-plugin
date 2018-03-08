@@ -24,11 +24,11 @@ import static org.powermock.api.mockito.PowerMockito.when;
 /**
  * Created by furkanbrgl on 23/11/2017.
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(LoadiumService.class)
+//@RunWith(PowerMockRunner.class)
+//mvn hpi:run@PrepareForTest(LoadiumService.class)
 public class SessionOperationTest {
 
-
+/*
     private final static Logger LOG = Logger.getLogger(SessionOperationTest.class);
 
     @Mock
@@ -104,5 +104,5 @@ public class SessionOperationTest {
 
 
     }
-
+*/
 }

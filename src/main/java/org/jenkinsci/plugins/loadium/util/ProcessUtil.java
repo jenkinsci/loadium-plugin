@@ -1,12 +1,12 @@
 package org.jenkinsci.plugins.loadium.util;
 
 import hudson.FilePath;
-import org.apache.log4j.Logger;
-import org.eclipse.jetty.util.log.StdErrLog;
+import hudson.model.BuildListener;
 import org.jenkinsci.plugins.loadium.enums.JMeterSessionStatus;
-import org.jenkinsci.plugins.loadium.model.wrapper.DefaultResponse;
 import org.jenkinsci.plugins.loadium.model.wrapper.JMeterRunningSessionResponse;
 import org.jenkinsci.plugins.loadium.services.LoadiumService;
+
+import java.util.logging.Logger;
 
 /**
  * Created by furkanbrgl on 17/11/2017.
@@ -15,12 +15,12 @@ public class ProcessUtil {
 
     private final static int DELAY = 30000;
 
-    private final static Logger LOGGER = Logger.getLogger(ProcessUtil.class);
+    private final static Logger LOGGER = Logger.getLogger(ProcessUtil.class.getName());
 
     private ProcessUtil() {
     }
 
-    public static void sessionStartedProgress(String sessionKey, StdErrLog loadiumLog) throws Exception {
+    public static void sessionStartedProgress(String sessionKey,BuildListener loadiumLog) throws Exception {
 
         JMeterSessionStatus sessionStatus;
         JMeterRunningSessionResponse jMeterRunningSessionResponse;
@@ -32,18 +32,18 @@ public class ProcessUtil {
             sessionStatus = jMeterRunningSessionResponse.getjMeterSessionBasicDetailsDTO().getSessionStatus();
 
             if (!sessionStatus.equals(JMeterSessionStatus.STARTED)) {
-                loadiumLog.info("Loadium for session key " + sessionKey.substring(0,10) + " is finishing build... ");
+                loadiumLog.getLogger().print("Loadium for session key " + sessionKey.substring(0,10) + " is finishing build... ");
                 break;
             }
 
             if (Thread.interrupted()) {
-                loadiumLog.info("Job was stopped by user on Jenkins");
+                loadiumLog.getLogger().print("Job was stopped by user on Jenkins");
                 throw new InterruptedException("Job was stopped by user on Jenkins");
             }
         }
     }
 
-    public static void sessionEndedProgress(String sessionKey, String testKey, StdErrLog loadiumLog) throws Exception {
+    public static void sessionEndedProgress(String sessionKey, String testKey, BuildListener loadiumLog) throws Exception {
 
         JMeterSessionStatus sessionStatus;
         JMeterRunningSessionResponse jMeterRunningSessionResponse;
@@ -51,7 +51,7 @@ public class ProcessUtil {
         try {
             LoadiumService.getInstance().stopSession(sessionKey, testKey);
         } catch (Exception e) {
-            LOGGER.warn("An error has occurred while stopping session. Maybe your session was stopped on Loadium. Because of that we had HTTP/500 error. ");
+            LOGGER.warning("An error has occurred while stopping session. Maybe your session was stopped on Loadium. Because of that we had HTTP/500 error. ");
         }
 
         while (true) {
@@ -61,7 +61,7 @@ public class ProcessUtil {
             sessionStatus = jMeterRunningSessionResponse.getjMeterSessionBasicDetailsDTO().getSessionStatus();
 
             if (sessionStatus.equals(JMeterSessionStatus.FINISHED)) {
-                loadiumLog.info("Loadium Session is being stopped on Loadium APi");
+                loadiumLog.getLogger().print("Loadium Session is being stopped on Loadium APi");
                 break;
             }
         }
@@ -78,7 +78,7 @@ public class ProcessUtil {
         return "dummy@mail.com";
     }
 
-    public static void saveReport(String reportName, String report, FilePath filePath, StdErrLog loadiumLog) {
+    public static void saveReport(String reportName, String report, FilePath filePath, Logger loadiumLog) {
         //TODO: exports report
     }
 
