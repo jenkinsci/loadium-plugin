@@ -1,5 +1,7 @@
 package com.loadium.jenkins.loadium.model;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.Date;
 
 /**
@@ -33,10 +35,7 @@ public class JMeterTestBasicDetailsDTO {
         this.testName = testName;
     }
 
-    public Date getCreatedTime() {
-        return createdTime;
-    }
-
+    @SuppressFBWarnings({"URF_UNREAD_FIELD", "EI_EXPOSE_REP2"})
     public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
     }

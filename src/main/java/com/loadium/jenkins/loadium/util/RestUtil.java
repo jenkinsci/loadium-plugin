@@ -1,5 +1,6 @@
 package com.loadium.jenkins.loadium.util;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.commons.lang.ObjectUtils;
@@ -30,17 +31,19 @@ public class RestUtil {
                 .extract()
                 .response();
 
-        if (response.getStatusCode() != 200) {
-            LOGGER.info("getResourceRestCall");
-            throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()));
-        }
-
         if(response == null)
             throw new NullPointerException("Response is null");
-        else
+        else {
+            if (response.getStatusCode() != 200) {
+                LOGGER.info("getResourceRestCall");
+                throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()));
+            }
+        }
+
         return response.getBody().prettyPrint();
     }
 
+    @SuppressFBWarnings("NP_NULL_ON_SOME_PATH")
     public String postResourceRestCall(String url, Object o) throws Exception {
 
         Response response = null;
@@ -53,18 +56,17 @@ public class RestUtil {
                     .response();
         }
 
-        if (response.getStatusCode() != 200) {
-            LOGGER.info("postResourceRestCall");
-            LOGGER.info("Response Code : " + response.getStatusCode());
-            throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()));
-        }
+            if (response.getStatusCode() != 200) {
+                LOGGER.info("postResourceRestCall");
+                LOGGER.info("Response Code : " + response.getStatusCode());
+                throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()));
+            }
 
-        if(response == null)
-            throw new NullPointerException("Response is null");
-        else
+
             return response.getBody().prettyPrint();
     }
 
+    @SuppressFBWarnings("NP_NULL_ON_SOME_PATH")
     public String deleteResourceRestCall(String url, Object o) throws Exception {
 
         Response response = null;
@@ -77,11 +79,12 @@ public class RestUtil {
                     .response();
         }
 
-        if (response.getStatusCode() != 200) {
-            LOGGER.info("deleteResourceRestCall");
-            LOGGER.info("Response Code : " + response.getStatusCode());
-            throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()));
-        }
+
+            if (response.getStatusCode() != 200) {
+                LOGGER.info("deleteResourceRestCall");
+                LOGGER.info("Response Code : " + response.getStatusCode());
+                throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()));
+            }
 
         return response.getBody().prettyPrint();
     }
