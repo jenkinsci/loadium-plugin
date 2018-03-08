@@ -1,11 +1,13 @@
 package com.loadium.jenkins.loadium.services;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.log4j.Logger;
 import com.loadium.jenkins.loadium.util.RestUtil;
 
 /**
  * Created by furkanbrgl on 13/11/2017.
  */
+@SuppressFBWarnings("MS_PKGPROTECT")
 public class AuthService {
 
     public String username;
@@ -14,13 +16,14 @@ public class AuthService {
 
     private final static Logger LOGGER = Logger.getLogger(AuthService.class);
 
-    private static AuthService instance = null;
+    private static AuthService instance;
     private RestUtil rest;
 
 
     protected AuthService() {
     }
 
+    @SuppressFBWarnings("LI_LAZY_INIT_STATIC")
     public static AuthService getInstance() {
         if (instance == null) {
             instance = new AuthService();

@@ -26,16 +26,16 @@ public class CredentialsUtil {
     public static List<LoadiumCredentials> getCredentials(Object scope) {
 
         List<LoadiumCredentials> result = new ArrayList<LoadiumCredentials>();
-        Set<String> addedCredentials = new HashSet<>();
+       // Set<String> addedCredentials = new HashSet<>();
 
         Item item = scope instanceof Item ? (Item) scope : null;
-        StringBuilder id = new StringBuilder();
+      //  StringBuilder id = new StringBuilder();
 
         for (LoadiumCredentials c : CredentialsProvider.lookupCredentials(LoadiumCredentials.class, item, ACL.SYSTEM)) {
-            id.append(c.getId());
+        //    id.append(c.getId());
             result.add(c);
-            addedCredentials.add(id.toString());
-            id.setLength(0);
+        //    addedCredentials.add(id.toString());
+         //   id.setLength(0);
         }
 
         return result;
