@@ -1,46 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE project [
-        <!ELEMENT project (modelVersion|parent|artifactId|version|packaging|properties|name|description|url|licenses|dependencies|repositories|pluginRepositories|build|developers)*>
-        <!ATTLIST project
-                xmlns CDATA #REQUIRED
-                xmlns:xsi CDATA #REQUIRED
-                xsi:schemaLocation CDATA #REQUIRED>
-        <!ELEMENT modelVersion (#PCDATA)>
-        <!ELEMENT parent (groupId|artifactId|version|relativePath)*>
-        <!ELEMENT groupId (#PCDATA)>
-        <!ELEMENT artifactId (#PCDATA)>
-        <!ELEMENT version (#PCDATA)>
-        <!ELEMENT relativePath (#PCDATA)>
-        <!ELEMENT packaging (#PCDATA)>
-        <!ELEMENT properties (jenkins.version|project.build.sourceEncoding|project.enviroment.path|maven.compiler.source|maven.compiler.target)*>
-        <!ELEMENT jenkins.version (#PCDATA)>
-        <!ELEMENT project.build.sourceEncoding (#PCDATA)>
-        <!ELEMENT project.enviroment.path (#PCDATA)>
-        <!ELEMENT maven.compiler.source (#PCDATA)>
-        <!ELEMENT maven.compiler.target (#PCDATA)>
-        <!ELEMENT name (#PCDATA)>
-        <!ELEMENT description (#PCDATA)>
-        <!ELEMENT url (#PCDATA)>
-        <!ELEMENT licenses (license)*>
-        <!ELEMENT license (name|url)*>
-        <!ELEMENT dependencies (dependency)*>
-        <!ELEMENT dependency (groupId|artifactId|version|scope)*>
-        <!ELEMENT scope (#PCDATA)>
-        <!ELEMENT repositories (repository)*>
-        <!ELEMENT repository (id|url)*>
-        <!ELEMENT id (#PCDATA)>
-        <!ELEMENT pluginRepositories (pluginRepository)*>
-        <!ELEMENT pluginRepository (id|url)*>
-        <!ELEMENT build (plugins)*>
-        <!ELEMENT plugins (plugin)*>
-        <!ELEMENT plugin (groupId|artifactId|version|configuration)*>
-        <!ELEMENT configuration (source|target)*>
-        <!ELEMENT source (#PCDATA)>
-        <!ELEMENT target (#PCDATA)>
-        <!ELEMENT developers (developer)*>
-        <!ELEMENT developer (id|name|email)*>
-        <!ELEMENT email (#PCDATA)>
-        ]>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -74,6 +32,19 @@
             <url>http://opensource.org/licenses/MIT</url>
         </license>
     </licenses>
+
+    <developers>
+        <developer>
+            <id>tarikfasun</id>
+            <name>Senior Developer</name>
+            <email>tarik.fasun@sahabt.com</email>
+        </developer>
+        <developer>
+            <id>selcuksozuer</id>
+            <name>Senior Developer</name>
+            <email>selcuk.sozuer@sahabt.com</email>
+        </developer>
+    </developers>
         
     <scm>
         <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
@@ -215,23 +186,7 @@
         </plugins>
     </build>
 
-    <developers>
-        <developer>
-            <id>tarikfasun</id>
-            <name>Senior Developer</name>
-            <email>tarik.fasun@sahabt.com</email>
-        </developer>
-        <developer>
-            <id>furkanbirgul</id>
-            <name>Senior Developer</name>
-            <email>furkan.birgul@sahabt.com</email>
-        </developer>
-        <developer>
-            <id>canberkakduygu</id>
-            <name>Product Owner</name>
-            <email>tcanberk@loadium.com</email>
-        </developer>
-    </developers>
+
 
 
 </project>

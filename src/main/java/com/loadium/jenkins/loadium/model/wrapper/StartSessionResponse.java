@@ -1,6 +1,6 @@
 package com.loadium.jenkins.loadium.model.wrapper;
 
-import com.loadium.jenkins.loadium.model.JMeterSessionBasicDetailsDTO;
+import com.loadium.jenkins.loadium.model.LoadiumSessionBasicDetailsDTO;
 
 /**
  * Created by furkanbrgl on 20/11/2017.
@@ -8,7 +8,7 @@ import com.loadium.jenkins.loadium.model.JMeterSessionBasicDetailsDTO;
  */
 public class StartSessionResponse {
 
-    private JMeterSessionBasicDetailsDTO session;
+    private LoadiumSessionBasicDetailsDTO session;
 
     private String status;
 
@@ -16,11 +16,11 @@ public class StartSessionResponse {
     public StartSessionResponse() {
     }
 
-    public JMeterSessionBasicDetailsDTO getSession() {
+    public LoadiumSessionBasicDetailsDTO getSession() {
         return session;
     }
 
-    public void setSession(JMeterSessionBasicDetailsDTO session) {
+    public void setSession(LoadiumSessionBasicDetailsDTO session) {
         this.session = session;
     }
 

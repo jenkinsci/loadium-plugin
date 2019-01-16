@@ -3,7 +3,7 @@ package com.loadium.jenkins.loadium.enums;
 /**
  * Created by furkanbrgl on 17/11/2017.
  */
-public enum JMeterSessionStatus {
+public enum LoadiumSessionStatus {
 
     FAILED(-1),
     INITIALIZING(1),
@@ -13,7 +13,7 @@ public enum JMeterSessionStatus {
 
     private int level;
 
-    JMeterSessionStatus(int level) {
+    LoadiumSessionStatus(int level) {
         this.level = level;
     }
 

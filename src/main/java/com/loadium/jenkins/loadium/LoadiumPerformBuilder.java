@@ -17,7 +17,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jenkinsci.Symbol;
 import com.loadium.jenkins.loadium.model.CredentialModel;
-import com.loadium.jenkins.loadium.model.JMeterTestBasicDetailsDTO;
+import com.loadium.jenkins.loadium.model.LoadiumTestBasicDetailsDTO;
 import com.loadium.jenkins.loadium.services.AuthService;
 import com.loadium.jenkins.loadium.services.LoadiumService;
 import com.loadium.jenkins.loadium.util.CredentialsUtil;
@@ -211,14 +211,14 @@ public class LoadiumPerformBuilder extends Builder {
                     return items;
                 }
 
-                List<JMeterTestBasicDetailsDTO> detailsDTOS = loadiumService.getTests();
+                List<LoadiumTestBasicDetailsDTO> detailsDTOS = loadiumService.getTests();
 
                 if (detailsDTOS == null) {
                     items.add("Credential is not valid", "-1");
                 } else if (detailsDTOS.isEmpty()) {
                     items.add("No Test present for this credential", "-1");
                 } else {
-                    for (JMeterTestBasicDetailsDTO testDto : detailsDTOS) {
+                    for (LoadiumTestBasicDetailsDTO testDto : detailsDTOS) {
                         items.add(new ListBoxModel.Option(testDto.getTestName(), testDto.getTestKey()));
                     }
 

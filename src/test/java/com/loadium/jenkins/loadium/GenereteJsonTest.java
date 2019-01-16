@@ -2,12 +2,12 @@ package com.loadium.jenkins.loadium;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.loadium.jenkins.loadium.enums.JMeterSessionStatus;
-import com.loadium.jenkins.loadium.model.JMeterSessionBasicDetailsDTO;
-import com.loadium.jenkins.loadium.model.JMeterTestBasicDetailsDTO;
+import com.loadium.jenkins.loadium.enums.LoadiumSessionStatus;
+import com.loadium.jenkins.loadium.model.LoadiumSessionBasicDetailsDTO;
+import com.loadium.jenkins.loadium.model.LoadiumTestBasicDetailsDTO;
 import com.loadium.jenkins.loadium.model.wrapper.DefaultResponse;
 import com.loadium.jenkins.loadium.model.wrapper.GetBasicTestResponse;
-import com.loadium.jenkins.loadium.model.wrapper.JMeterRunningSessionResponse;
+import com.loadium.jenkins.loadium.model.wrapper.LoadiumRunningSessionResponse;
 import com.loadium.jenkins.loadium.model.wrapper.StartSessionResponse;
 import org.junit.Test;
 
@@ -25,13 +25,13 @@ public class GenereteJsonTest {
 
         StartSessionResponse startSessionResponse = new StartSessionResponse();
 
-        JMeterSessionBasicDetailsDTO jMeterSessionBasicDetailsDTO = new JMeterSessionBasicDetailsDTO();
-        jMeterSessionBasicDetailsDTO.setSessionKey("bklre7u87n3ph4ah660g12bpvs62qewq");
-        jMeterSessionBasicDetailsDTO.setTestKey("bklre7u87n3ph4ah660g12bpvs62qewq");
-        jMeterSessionBasicDetailsDTO.setSessionStatus(JMeterSessionStatus.STARTED);
+        LoadiumSessionBasicDetailsDTO loadiumSessionBasicDetailsDTO = new LoadiumSessionBasicDetailsDTO();
+        loadiumSessionBasicDetailsDTO.setSessionKey("bklre7u87n3ph4ah660g12bpvs62qewq");
+        loadiumSessionBasicDetailsDTO.setTestKey("bklre7u87n3ph4ah660g12bpvs62qewq");
+        loadiumSessionBasicDetailsDTO.setSessionStatus(LoadiumSessionStatus.STARTED);
 
         startSessionResponse.setStatus("SUCCES");
-        startSessionResponse.setSession(jMeterSessionBasicDetailsDTO);
+        startSessionResponse.setSession(loadiumSessionBasicDetailsDTO);
 
         System.out.println(new ObjectMapper().writeValueAsString(startSessionResponse));
 
@@ -51,9 +51,9 @@ public class GenereteJsonTest {
 
         GetBasicTestResponse getBasicTestResponse = new GetBasicTestResponse();
 
-        List<JMeterTestBasicDetailsDTO> detailsDTOS = new ArrayList<>();
+        List<LoadiumTestBasicDetailsDTO> detailsDTOS = new ArrayList<>();
 
-        JMeterTestBasicDetailsDTO dto = new JMeterTestBasicDetailsDTO();
+        LoadiumTestBasicDetailsDTO dto = new LoadiumTestBasicDetailsDTO();
         dto.setCreatedTime(new Date());
         dto.setFavorite(true);
         dto.setOwner("furkanbrgl");
@@ -71,16 +71,16 @@ public class GenereteJsonTest {
     @Test
     public void genereteJMeterRunningSessionResponseJsonFromOj() throws JsonProcessingException {
 
-        JMeterRunningSessionResponse jMeterRunningSessionResponse = new JMeterRunningSessionResponse();
-        jMeterRunningSessionResponse.setStatus("SUCCES");
+        LoadiumRunningSessionResponse loadiumRunningSessionResponse = new LoadiumRunningSessionResponse();
+        loadiumRunningSessionResponse.setStatus("SUCCES");
 
-        JMeterSessionBasicDetailsDTO jMeterSessionBasicDetailsDTO = new JMeterSessionBasicDetailsDTO();
-        jMeterSessionBasicDetailsDTO.setSessionStatus(JMeterSessionStatus.STARTED);
-        jMeterSessionBasicDetailsDTO.setTestKey("vvdsa7u87n3ph4ah660g12bpvs62qewq");
-        jMeterSessionBasicDetailsDTO.setSessionKey("bklre7u87n3ph4ah660g12bpvs62qewq");
+        LoadiumSessionBasicDetailsDTO loadiumSessionBasicDetailsDTO = new LoadiumSessionBasicDetailsDTO();
+        loadiumSessionBasicDetailsDTO.setSessionStatus(LoadiumSessionStatus.STARTED);
+        loadiumSessionBasicDetailsDTO.setTestKey("vvdsa7u87n3ph4ah660g12bpvs62qewq");
+        loadiumSessionBasicDetailsDTO.setSessionKey("bklre7u87n3ph4ah660g12bpvs62qewq");
 
-        jMeterRunningSessionResponse.setjMeterSessionBasicDetailsDTO(jMeterSessionBasicDetailsDTO);
-        System.out.println(new ObjectMapper().writeValueAsString(jMeterRunningSessionResponse));
+        loadiumRunningSessionResponse.setLoadiumSessionBasicDetailsDTO(loadiumSessionBasicDetailsDTO);
+        System.out.println(new ObjectMapper().writeValueAsString(loadiumRunningSessionResponse));
 
     }
 

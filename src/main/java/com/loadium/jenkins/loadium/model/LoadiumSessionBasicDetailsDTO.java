@@ -1,18 +1,18 @@
 package com.loadium.jenkins.loadium.model;
 
 
-import com.loadium.jenkins.loadium.enums.JMeterSessionStatus;
+import com.loadium.jenkins.loadium.enums.LoadiumSessionStatus;
 
 /**
  * Created by furkanbrgl on 20/11/2017.
  */
-public class JMeterSessionBasicDetailsDTO {
+public class LoadiumSessionBasicDetailsDTO {
 
     private String testKey;
     private String sessionKey;
-    private JMeterSessionStatus sessionStatus;
+    private LoadiumSessionStatus sessionStatus;
 
-    public JMeterSessionBasicDetailsDTO() {
+    public LoadiumSessionBasicDetailsDTO() {
     }
 
     public String getTestKey() {
@@ -31,11 +31,11 @@ public class JMeterSessionBasicDetailsDTO {
         this.sessionKey = sessionKey;
     }
 
-    public JMeterSessionStatus getSessionStatus() {
+    public LoadiumSessionStatus getSessionStatus() {
         return sessionStatus;
     }
 
-    public void setSessionStatus(JMeterSessionStatus sessionStatus) {
+    public void setSessionStatus(LoadiumSessionStatus sessionStatus) {
         this.sessionStatus = sessionStatus;
     }
 }
