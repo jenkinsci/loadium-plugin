@@ -1,7 +1,7 @@
 package com.loadium.jenkins.loadium.util;
 
-import com.loadium.jenkins.loadium.enums.JMeterSessionStatus;
-import com.loadium.jenkins.loadium.model.wrapper.JMeterRunningSessionResponse;
+import com.loadium.jenkins.loadium.enums.LoadiumSessionStatus;
+import com.loadium.jenkins.loadium.model.wrapper.LoadiumRunningSessionResponse;
 import com.loadium.jenkins.loadium.services.LoadiumService;
 import hudson.FilePath;
 import hudson.model.BuildListener;
@@ -22,16 +22,16 @@ public class ProcessUtil {
 
     public static void sessionStartedProgress(String sessionKey,BuildListener loadiumLog) throws Exception {
 
-        JMeterSessionStatus sessionStatus;
-        JMeterRunningSessionResponse jMeterRunningSessionResponse;
+        LoadiumSessionStatus sessionStatus;
+        LoadiumRunningSessionResponse loadiumRunningSessionResponse;
 
         while (true) {
 
             Thread.sleep(DELAY);
-            jMeterRunningSessionResponse = LoadiumService.getInstance().getSessionStatus(sessionKey);
-            sessionStatus = jMeterRunningSessionResponse.getjMeterSessionBasicDetailsDTO().getSessionStatus();
+            loadiumRunningSessionResponse = LoadiumService.getInstance().getSessionStatus(sessionKey);
+            sessionStatus = loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus();
 
-            if (!sessionStatus.equals(JMeterSessionStatus.STARTED)) {
+            if (!sessionStatus.equals(LoadiumSessionStatus.STARTED)) {
                 loadiumLog.getLogger().print("Loadium for session key " + sessionKey.substring(0,10) + " is finishing build... ");
                 break;
             }
@@ -45,8 +45,8 @@ public class ProcessUtil {
 
     public static void sessionEndedProgress(String sessionKey, String testKey, BuildListener loadiumLog) throws Exception {
 
-        JMeterSessionStatus sessionStatus;
-        JMeterRunningSessionResponse jMeterRunningSessionResponse;
+        LoadiumSessionStatus sessionStatus;
+        LoadiumRunningSessionResponse loadiumRunningSessionResponse;
 
         try {
             LoadiumService.getInstance().stopSession(sessionKey, testKey);
@@ -57,10 +57,10 @@ public class ProcessUtil {
         while (true) {
 
             Thread.sleep(DELAY);
-            jMeterRunningSessionResponse = LoadiumService.getInstance().getSessionStatus(sessionKey);
-            sessionStatus = jMeterRunningSessionResponse.getjMeterSessionBasicDetailsDTO().getSessionStatus();
+            loadiumRunningSessionResponse = LoadiumService.getInstance().getSessionStatus(sessionKey);
+            sessionStatus = loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus();
 
-            if (sessionStatus.equals(JMeterSessionStatus.FINISHED)) {
+            if (sessionStatus.equals(LoadiumSessionStatus.FINISHED)) {
                 loadiumLog.getLogger().print("Loadium Session is being stopped on Loadium APi");
                 break;
             }

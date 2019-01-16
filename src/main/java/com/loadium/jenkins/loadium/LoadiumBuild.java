@@ -1,22 +1,20 @@
 package com.loadium.jenkins.loadium;
 
-import com.loadium.jenkins.loadium.enums.JMeterSessionStatus;
+import com.loadium.jenkins.loadium.enums.LoadiumSessionStatus;
 import com.loadium.jenkins.loadium.model.CredentialModel;
-import com.loadium.jenkins.loadium.model.wrapper.JMeterRunningSessionResponse;
+import com.loadium.jenkins.loadium.model.wrapper.LoadiumRunningSessionResponse;
 import com.loadium.jenkins.loadium.model.wrapper.StartSessionResponse;
 import com.loadium.jenkins.loadium.services.LoadiumService;
 import com.loadium.jenkins.loadium.util.EnviromentUtil;
 import com.loadium.jenkins.loadium.util.ProcessUtil;
 import hudson.model.BuildListener;
 import hudson.model.Result;
-import hudson.model.TaskListener;
 import hudson.remoting.Callable;
 //import org.eclipse.jetty.util.log.StdErrLog;
 import org.jenkinsci.remoting.RoleChecker;
 
 import java.io.PrintStream;
 import java.util.Calendar;
-import java.util.logging.Logger;
 
 /**
  * Created by furkanbrgl on 16/11/2017.
@@ -39,7 +37,7 @@ public class LoadiumBuild implements Callable<Result, Exception> {
 
         String sessionKey = null;
         String publicReportURL = null;
-        JMeterRunningSessionResponse jMeterRunningSessionResponse;
+        LoadiumRunningSessionResponse loadiumRunningSessionResponse;
 
         Result result = Result.SUCCESS;
 
@@ -69,9 +67,9 @@ public class LoadiumBuild implements Callable<Result, Exception> {
             while (true) {
 
                 Thread.sleep(DELAY);
-                jMeterRunningSessionResponse = loadiumService.getSessionStatus(sessionKey);
+                loadiumRunningSessionResponse = loadiumService.getSessionStatus(sessionKey);
 
-                if (jMeterRunningSessionResponse.getjMeterSessionBasicDetailsDTO().getSessionStatus().equals(JMeterSessionStatus.STARTED)) {
+                if (loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus().equals(LoadiumSessionStatus.STARTED)) {
                     publicReportURL = EnviromentUtil.getInstance().getPublicReportURL(this.getTestId(), sessionKey);
                     lentry.append("Loadium Test Report :  " + publicReportURL);
                     this.listener.getLogger().println(lentry.toString());
@@ -79,12 +77,12 @@ public class LoadiumBuild implements Callable<Result, Exception> {
                     break;
                 }
 
-                if (jMeterRunningSessionResponse.getjMeterSessionBasicDetailsDTO().getSessionStatus().equals(JMeterSessionStatus.FAILED)) {
+                if (loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus().equals(LoadiumSessionStatus.FAILED)) {
                     result = Result.FAILURE;
                     break;
                 }
 
-                if (jMeterRunningSessionResponse.getjMeterSessionBasicDetailsDTO().getSessionStatus().equals(JMeterSessionStatus.FINISHED)) {
+                if (loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus().equals(LoadiumSessionStatus.FINISHED)) {
                     publicReportURL = EnviromentUtil.getInstance().getPublicReportURL(this.getTestId(), sessionKey);
                     lentry.append("Loadium Test Report :  " + publicReportURL);
                     this.listener.getLogger().println(lentry.toString());
@@ -104,12 +102,12 @@ public class LoadiumBuild implements Callable<Result, Exception> {
 
             ProcessUtil.sessionStartedProgress(sessionKey, this.listener);
 
-            jMeterRunningSessionResponse = loadiumService.getSessionStatus(sessionKey);
-            if (jMeterRunningSessionResponse.getjMeterSessionBasicDetailsDTO().getSessionStatus().equals(JMeterSessionStatus.FAILED)) {
+            loadiumRunningSessionResponse = loadiumService.getSessionStatus(sessionKey);
+            if (loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus().equals(LoadiumSessionStatus.FAILED)) {
                 result = Result.FAILURE;
             }
 
-            if (jMeterRunningSessionResponse.getjMeterSessionBasicDetailsDTO().getSessionStatus().equals(JMeterSessionStatus.FINISHED)) {
+            if (loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus().equals(LoadiumSessionStatus.FINISHED)) {
                 result = Result.SUCCESS;
             }
 
@@ -137,7 +135,7 @@ public class LoadiumBuild implements Callable<Result, Exception> {
             //Finally Durumunda Session'ı her turlu kapatmalıyız. Zaten Bitmis de olabilir. Oyuzden sessionEndedProggress Method'u kapatma istegi gonderirken 500 alabilir.
             ProcessUtil.sessionEndedProgress(sessionKey, this.getTestId(), this.listener);
             //Session'ın Loadium arayüzünden kapanma ihtimali ne karsılık tekrar bir status kontrolu yapmalıyız.
-            if (loadiumService.getSessionStatus(sessionKey).getjMeterSessionBasicDetailsDTO().getSessionStatus().equals(JMeterSessionStatus.STARTED)) {
+            if (loadiumService.getSessionStatus(sessionKey).getLoadiumSessionBasicDetailsDTO().getSessionStatus().equals(LoadiumSessionStatus.STARTED)) {
                 ProcessUtil.sessionEndedProgress(sessionKey, this.getTestId(), this.listener);
             }
 

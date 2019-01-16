@@ -1,6 +1,6 @@
 package com.loadium.jenkins.loadium.model.wrapper;
 
-import com.loadium.jenkins.loadium.model.JMeterTestBasicDetailsDTO;
+import com.loadium.jenkins.loadium.model.LoadiumTestBasicDetailsDTO;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ public class GetBasicTestResponse {
 
     private String status;
 
-    private List<JMeterTestBasicDetailsDTO> testBasicDetailsDTOs;
+    private List<LoadiumTestBasicDetailsDTO> testBasicDetailsDTOs;
 
-    public GetBasicTestResponse(String status, List<JMeterTestBasicDetailsDTO> testBasicDetailsDTOs) {
+    public GetBasicTestResponse(String status, List<LoadiumTestBasicDetailsDTO> testBasicDetailsDTOs) {
         this.status = status;
         this.testBasicDetailsDTOs = testBasicDetailsDTOs;
     }
@@ -26,11 +26,11 @@ public class GetBasicTestResponse {
         this.status = status;
     }
 
-    public List<JMeterTestBasicDetailsDTO> getTestBasicDetailsDTOs() {
+    public List<LoadiumTestBasicDetailsDTO> getTestBasicDetailsDTOs() {
         return testBasicDetailsDTOs;
     }
 
-    public void setTestBasicDetailsDTOs(List<JMeterTestBasicDetailsDTO> testBasicDetailsDTOs) {
+    public void setTestBasicDetailsDTOs(List<LoadiumTestBasicDetailsDTO> testBasicDetailsDTOs) {
         this.testBasicDetailsDTOs = testBasicDetailsDTOs;
     }
 }

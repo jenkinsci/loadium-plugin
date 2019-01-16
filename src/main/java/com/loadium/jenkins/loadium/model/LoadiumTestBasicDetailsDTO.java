@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Created by furkanbrgl on 10/11/17.
  */
-public class JMeterTestBasicDetailsDTO {
+public class LoadiumTestBasicDetailsDTO {
     private String testKey;
     private String testName;
     private Date createdTime;
@@ -16,7 +16,7 @@ public class JMeterTestBasicDetailsDTO {
     private String owner;
 
 
-    public JMeterTestBasicDetailsDTO() {
+    public LoadiumTestBasicDetailsDTO() {
     }
 
     public String getTestKey() {

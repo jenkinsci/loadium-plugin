@@ -1,24 +1,5 @@
 package com.loadium.jenkins.loadium;
 
-import org.apache.log4j.Logger;
-import com.loadium.jenkins.loadium.model.JMeterTestBasicDetailsDTO;
-import com.loadium.jenkins.loadium.model.wrapper.DefaultResponse;
-import com.loadium.jenkins.loadium.model.wrapper.JMeterRunningSessionResponse;
-import com.loadium.jenkins.loadium.model.wrapper.StartSessionResponse;
-import com.loadium.jenkins.loadium.services.LoadiumService;
-import com.loadium.jenkins.loadium.util.RestUtil;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-
-import java.util.List;
-
 import static org.powermock.api.mockito.PowerMockito.when;
 
 /**
@@ -84,8 +65,8 @@ public class SessionOperationTest {
         when(restUtil.postResourceRestCall(Mockito.anyString(), Mockito.any(Object.class))).thenReturn(tempJson);
         PowerMockito.whenNew(RestUtil.class).withNoArguments().thenReturn(restUtil);
 
-        JMeterRunningSessionResponse jMeterRunningSessionResponse = loadiumService.getSessionStatus(sessionKey);
-        Assert.assertEquals(jMeterRunningSessionResponse.getjMeterSessionBasicDetailsDTO().getSessionKey(), "bklre7u87n3ph4ah660g12bpvs62qewq");
+        LoadiumRunningSessionResponse jMeterRunningSessionResponse = loadiumService.getSessionStatus(sessionKey);
+        Assert.assertEquals(jMeterRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionKey(), "bklre7u87n3ph4ah660g12bpvs62qewq");
 
     }
 
@@ -98,7 +79,7 @@ public class SessionOperationTest {
         when(restUtil.getResourceRestCall(Mockito.anyString())).thenReturn(tempJson);
         PowerMockito.whenNew(RestUtil.class).withNoArguments().thenReturn(restUtil);
 
-        List<JMeterTestBasicDetailsDTO> detailsDTOS = loadiumService.getTests();
+        List<LoadiumTestBasicDetailsDTO> detailsDTOS = loadiumService.getTests();
 
         Assert.assertEquals(detailsDTOS.get(0).getOwner(), "furkanbrgl");
 

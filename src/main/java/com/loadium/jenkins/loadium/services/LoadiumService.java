@@ -3,8 +3,8 @@ package com.loadium.jenkins.loadium.services;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loadium.jenkins.loadium.model.wrapper.DefaultResponse;
 import com.loadium.jenkins.loadium.model.wrapper.GetBasicTestResponse;
-import com.loadium.jenkins.loadium.model.JMeterTestBasicDetailsDTO;
-import com.loadium.jenkins.loadium.model.wrapper.JMeterRunningSessionResponse;
+import com.loadium.jenkins.loadium.model.LoadiumTestBasicDetailsDTO;
+import com.loadium.jenkins.loadium.model.wrapper.LoadiumRunningSessionResponse;
 import com.loadium.jenkins.loadium.model.wrapper.StartSessionResponse;
 import com.loadium.jenkins.loadium.util.RestUtil;
 
@@ -29,7 +29,7 @@ public class LoadiumService {
         return instance;
     }
 
-    public List<JMeterTestBasicDetailsDTO> getTests() throws Exception {
+    public List<LoadiumTestBasicDetailsDTO> getTests() throws Exception {
 
         rest = new RestUtil();
         String url = "/tests";
@@ -54,15 +54,15 @@ public class LoadiumService {
 
     }
 
-    public JMeterRunningSessionResponse getSessionStatus(String sessionKey) throws Exception {
+    public LoadiumRunningSessionResponse getSessionStatus(String sessionKey) throws Exception {
 
         rest = new RestUtil();
         String url = "/session/" + sessionKey + "/detail";
         String result = rest.postResourceRestCall(url, null);
         ObjectMapper mapper = new ObjectMapper();
-        JMeterRunningSessionResponse jMeterRunningSessionResponse = mapper.readValue(result, JMeterRunningSessionResponse.class);
+        LoadiumRunningSessionResponse loadiumRunningSessionResponse = mapper.readValue(result, LoadiumRunningSessionResponse.class);
 
-        return jMeterRunningSessionResponse;
+        return loadiumRunningSessionResponse;
 
     }
 
