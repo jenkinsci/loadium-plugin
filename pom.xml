@@ -12,7 +12,7 @@
 
     <groupId>com.loadium.jenkins</groupId>
     <artifactId>loadium</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.3-SNAPSHOT</version>
     <packaging>hpi</packaging>
     <name>Loadium Plugin</name>
     <description>This plugin allows us to run performance tests by using Loadium.io</description>
