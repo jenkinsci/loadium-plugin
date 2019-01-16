@@ -1,3 +1,4 @@
 <?jelly escape-by-default='true'?>
 <div>
+This plugin allows us to run performance tests by using loadium.com
 </div>
