@@ -1,38 +1,33 @@
 package com.loadium.jenkins.loadium.util;
 
-import com.loadium.jenkins.loadium.enums.LoadiumSessionStatus;
-import com.loadium.jenkins.loadium.model.wrapper.LoadiumRunningSessionResponse;
+import com.loadium.jenkins.loadium.model.enums.LoadiumSessionStatus;
+import com.loadium.jenkins.loadium.model.enums.ServiceType;
+import com.loadium.jenkins.loadium.model.response.LoadiumRunningSessionResponse;
 import com.loadium.jenkins.loadium.services.LoadiumService;
-import hudson.FilePath;
+import com.loadium.jenkins.loadium.services.ServiceFactory;
 import hudson.model.BuildListener;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.logging.Logger;
-
-/**
- * Created by furkanbrgl on 17/11/2017.
- */
+@Slf4j
 public class ProcessUtil {
+    private static LoadiumService loadiumService = (LoadiumService) ServiceFactory.getService(ServiceType.LOADIUM);
 
     private final static int DELAY = 30000;
-
-    private final static Logger LOGGER = Logger.getLogger(ProcessUtil.class.getName());
 
     private ProcessUtil() {
     }
 
-    public static void sessionStartedProgress(String sessionKey,BuildListener loadiumLog) throws Exception {
-
+    public static void sessionStartedProgress(String sessionKey, BuildListener loadiumLog) throws Exception {
         LoadiumSessionStatus sessionStatus;
         LoadiumRunningSessionResponse loadiumRunningSessionResponse;
 
         while (true) {
-
             Thread.sleep(DELAY);
-            loadiumRunningSessionResponse = LoadiumService.getInstance().getSessionStatus(sessionKey);
+            loadiumRunningSessionResponse = loadiumService.getSessionStatus(sessionKey);
             sessionStatus = loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus();
 
             if (!sessionStatus.equals(LoadiumSessionStatus.STARTED)) {
-                loadiumLog.getLogger().print("Loadium for session key " + sessionKey.substring(0,10) + " is finishing build... ");
+                loadiumLog.getLogger().print("Loadium for session key " + sessionKey.substring(0, 10) + " is finishing build... ");
                 break;
             }
 
@@ -44,20 +39,18 @@ public class ProcessUtil {
     }
 
     public static void sessionEndedProgress(String sessionKey, String testKey, BuildListener loadiumLog) throws Exception {
-
         LoadiumSessionStatus sessionStatus;
         LoadiumRunningSessionResponse loadiumRunningSessionResponse;
 
         try {
-            LoadiumService.getInstance().stopSession(sessionKey, testKey);
+            loadiumService.stopSession(sessionKey, testKey);
         } catch (Exception e) {
-            LOGGER.warning("An error has occurred while stopping session. Maybe your session was stopped on Loadium. Because of that we had HTTP/500 error. ");
+            log.warn("An error has occurred while stopping session. Maybe your session was stopped on Loadium. Because of that we had HTTP/500 error. ");
         }
 
         while (true) {
-
             Thread.sleep(DELAY);
-            loadiumRunningSessionResponse = LoadiumService.getInstance().getSessionStatus(sessionKey);
+            loadiumRunningSessionResponse = loadiumService.getSessionStatus(sessionKey);
             sessionStatus = loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus();
 
             if (sessionStatus.equals(LoadiumSessionStatus.FINISHED)) {
@@ -66,20 +59,4 @@ public class ProcessUtil {
             }
         }
     }
-
-    public static boolean stopMastersSession(String masterId) throws Exception {
-        boolean terminate = true;
-        //TODO: Stop Sesssion
-        return terminate;
-    }
-
-    public static String getUserEmail() {
-        //TODO: gets mail
-        return "dummy@mail.com";
-    }
-
-    public static void saveReport(String reportName, String report, FilePath filePath, Logger loadiumLog) {
-        //TODO: exports report
-    }
-
 }
