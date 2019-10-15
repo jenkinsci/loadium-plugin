@@ -68,6 +68,14 @@ public class LoadiumBuilder extends Builder {
                 token = authService.getAuthToken(credentialModelDTO.getUsername(), String.valueOf(credentialModelDTO.getPassword()));
                 if (token != null) {
                     VirtualChannel c = launcher.getChannel();
+                    if(c == null) {
+                        listener.fatalError("Launcher is null!");
+                        result = Result.NOT_BUILT;
+                        build.setResult(result);
+                        log.error("Launcher is null!");
+                        return false;
+                    }
+
                     LoadiumBuild loadiumBuild = new LoadiumBuild();
                     loadiumBuild.setCredentialModelDTO(credentialModelDTO);
                     loadiumBuild.setTestId(getTestId());
