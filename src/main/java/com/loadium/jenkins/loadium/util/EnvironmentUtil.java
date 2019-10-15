@@ -1,46 +1,35 @@
 package com.loadium.jenkins.loadium.util;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.util.Properties;
 
-/**
- * Created by furkanbrgl on 14/11/2017.
- */
-public class EnviromentUtil {
+@Slf4j
+public class EnvironmentUtil {
+    private final static String PROPERTY_FILE = "environment.properties";
 
-    private final static String propertyName = "enviroment.properties";
-    private final static Logger LOGGER = Logger.getLogger(RestUtil.class);
+    private static EnvironmentUtil instance = new EnvironmentUtil();
 
-    private static EnviromentUtil instance = new EnviromentUtil();
-    public static EnviromentUtil getInstance() {
+    public static EnvironmentUtil getInstance() {
         return instance;
     }
 
-    private EnviromentUtil() {
+    private EnvironmentUtil() {
         this.loadToSystemFile();
     }
 
     private void loadToSystemFile() {
-
-        String propertyFile = this.propertyName;
         Properties properties = System.getProperties();
-
         try {
-            properties.load(getClass().getClassLoader().getResourceAsStream(propertyFile));
-            LOGGER.info("Enviroment properties loaded to System");
-        } catch (IOException e) {
-            e.printStackTrace();
+            properties.load(getClass().getClassLoader().getResourceAsStream(PROPERTY_FILE));
+            log.info("Environment properties loaded to System");
+        } catch (Exception e) {
+            log.error("Error occurred while loading environment.properties file!", e);
         }
     }
 
     public String getResourceBaseURL() {
         return System.getProperty("resource.base.url");
-    }
-
-    public String getWatchmanBaseURL() {
-        return System.getProperty("watchman.base.url");
     }
 
     public String getAuthorization() {
@@ -61,6 +50,14 @@ public class EnviromentUtil {
 
     public String getUiApiPublic() {
         return System.getProperty("ui.api.public");
+    }
+
+    public String getUsername() {
+        return System.getProperty("username");
+    }
+
+    public String getPassword() {
+        return System.getProperty("password");
     }
 
     public String getPublicReportURL(String testKey, String sessionKey) {

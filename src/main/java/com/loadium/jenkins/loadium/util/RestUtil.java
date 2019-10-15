@@ -3,39 +3,32 @@ package com.loadium.jenkins.loadium.util;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.log4j.Logger;
-import com.loadium.jenkins.loadium.services.AuthService;
+import lombok.extern.slf4j.Slf4j;
 
 import static io.restassured.RestAssured.given;
 
-/**
- * Created by furkanbrgl on 14/11/2017.
- */
+@Slf4j
 public class RestUtil {
+    private String authToken;
+    private EnvironmentUtil environmentUtil;
 
-    private final static Logger LOGGER = Logger.getLogger(RestUtil.class);
-    private AuthService authService = AuthService.getInstance();
-
-    private EnviromentUtil enviromentUtil = null;
-
-    public RestUtil() {
-        enviromentUtil = EnviromentUtil.getInstance();
+    public RestUtil(String authToken) {
+        this.environmentUtil = EnvironmentUtil.getInstance();
+        this.authToken = authToken;
     }
 
-    public String getResourceRestCall(String url) throws Exception {
-
-        Response response = given().header("Authorization", "bearer " + authService.getAuthToken())
-                .get(enviromentUtil.getResourceBaseURL() + url)
+    public String getResourceRestCall(String url) {
+        Response response = given().header("Authorization", "bearer " + this.authToken)
+                .get(environmentUtil.getResourceBaseURL() + url)
                 .then()
                 .extract()
                 .response();
 
-        if(response == null)
+        if (response == null)
             throw new NullPointerException("Response is null");
         else {
             if (response.getStatusCode() != 200) {
-                LOGGER.info("getResourceRestCall");
+                log.info("getResourceRestCall");
                 throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()));
             }
         }
@@ -44,70 +37,63 @@ public class RestUtil {
     }
 
     @SuppressFBWarnings("NP_NULL_ON_SOME_PATH")
-    public String postResourceRestCall(String url, Object o) throws Exception {
-
+    public String postResourceRestCall(String url, Object o) {
         Response response = null;
         if (o == null) {
-
-            response = given().header("Authorization", "bearer " + authService.getAuthToken())
-                    .post(enviromentUtil.getResourceBaseURL() + url)
+            response = given().header("Authorization", "bearer " + this.authToken)
+                    .post(environmentUtil.getResourceBaseURL() + url)
                     .then()
                     .extract()
                     .response();
         }
 
-            if (response.getStatusCode() != 200) {
-                LOGGER.info("postResourceRestCall");
-                LOGGER.info("Response Code : " + response.getStatusCode());
-                throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()));
-            }
+        if (response.getStatusCode() != 200) {
+            log.info("postResourceRestCall");
+            log.info("Response Code : " + response.getStatusCode());
+            throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()));
+        }
 
-
-            return response.getBody().prettyPrint();
+        return response.getBody().prettyPrint();
     }
 
     @SuppressFBWarnings("NP_NULL_ON_SOME_PATH")
-    public String deleteResourceRestCall(String url, Object o) throws Exception {
-
+    public String deleteResourceRestCall(String url, Object o) {
         Response response = null;
         if (o == null) {
-
-            response = given().header("Authorization", "bearer " + authService.getAuthToken())
-                    .delete(enviromentUtil.getResourceBaseURL() + url)
+            response = given().header("Authorization", "bearer " + this.authToken)
+                    .delete(environmentUtil.getResourceBaseURL() + url)
                     .then()
                     .extract()
                     .response();
         }
 
-
-            if (response.getStatusCode() != 200) {
-                LOGGER.info("deleteResourceRestCall");
-                LOGGER.info("Response Code : " + response.getStatusCode());
-                throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()));
-            }
+        if (response.getStatusCode() != 200) {
+            log.info("deleteResourceRestCall");
+            log.info("Response Code : " + response.getStatusCode());
+            throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()));
+        }
 
         return response.getBody().prettyPrint();
     }
 
     public String getAuthToken(String userName, String password) throws Exception {
-
-        String accessToken = null;
-        Response response = given().header("Authorization",enviromentUtil.getAuthorization())
-                .queryParam("grant_type",enviromentUtil.getGrantType())
+        String accessToken;
+        Response response = given().header("Authorization", environmentUtil.getAuthorization())
+                .queryParam("grant_type", environmentUtil.getGrantType())
                 .queryParam("username", userName)
                 .queryParam("password", password)
-                .queryParam("scope", enviromentUtil.getScope())
-                .post(enviromentUtil.getAuthServerTokenURL())
+                .queryParam("scope", environmentUtil.getScope())
+                .post(environmentUtil.getAuthServerTokenURL())
                 .then()
                 .extract().response();
 
         JsonPath jsonPathEvaluator = response.jsonPath();
 
         accessToken = jsonPathEvaluator.get("access_token");
-        if(accessToken == null){
-            throw new Exception();
+        if (accessToken == null) {
+            throw new Exception("Could not get access token!");
         }
-        return accessToken;
 
+        return accessToken;
     }
 }

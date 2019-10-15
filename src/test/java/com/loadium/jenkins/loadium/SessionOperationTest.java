@@ -1,7 +1,5 @@
 package com.loadium.jenkins.loadium;
 
-import static org.powermock.api.mockito.PowerMockito.when;
-
 /**
  * Created by furkanbrgl on 23/11/2017.
  */

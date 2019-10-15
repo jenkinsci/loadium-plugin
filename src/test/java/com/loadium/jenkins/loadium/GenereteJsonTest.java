@@ -2,13 +2,13 @@ package com.loadium.jenkins.loadium;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.loadium.jenkins.loadium.enums.LoadiumSessionStatus;
-import com.loadium.jenkins.loadium.model.LoadiumSessionBasicDetailsDTO;
-import com.loadium.jenkins.loadium.model.LoadiumTestBasicDetailsDTO;
-import com.loadium.jenkins.loadium.model.wrapper.DefaultResponse;
-import com.loadium.jenkins.loadium.model.wrapper.GetBasicTestResponse;
-import com.loadium.jenkins.loadium.model.wrapper.LoadiumRunningSessionResponse;
-import com.loadium.jenkins.loadium.model.wrapper.StartSessionResponse;
+import com.loadium.jenkins.loadium.model.enums.LoadiumSessionStatus;
+import com.loadium.jenkins.loadium.model.dto.LoadiumSessionBasicDetailsDTO;
+import com.loadium.jenkins.loadium.model.dto.LoadiumTestBasicDetailsDTO;
+import com.loadium.jenkins.loadium.model.response.DefaultResponse;
+import com.loadium.jenkins.loadium.model.response.GetBasicTestResponse;
+import com.loadium.jenkins.loadium.model.response.LoadiumRunningSessionResponse;
+import com.loadium.jenkins.loadium.model.response.StartSessionResponse;
 import org.junit.Test;
 
 import java.util.ArrayList;
