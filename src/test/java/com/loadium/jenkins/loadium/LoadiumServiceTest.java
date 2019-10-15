@@ -1,6 +1,7 @@
 package com.loadium.jenkins.loadium;
 
 import com.loadium.jenkins.loadium.model.dto.LoadiumTestBasicDetailsDTO;
+import com.loadium.jenkins.loadium.model.enums.LoadiumSessionStatus;
 import com.loadium.jenkins.loadium.model.enums.ServiceType;
 import com.loadium.jenkins.loadium.model.response.StartSessionResponse;
 import com.loadium.jenkins.loadium.services.AuthService;
@@ -63,6 +64,6 @@ public class LoadiumServiceTest {
         Assert.assertNotNull(response.getSession().getSessionKey());
         Assert.assertNotNull(response.getSession().getTestKey());
         Assert.assertEquals(testKey, response.getSession().getTestKey());
-        Assert.assertEquals("SUCCESS", response.getSession().getSessionStatus());
+        Assert.assertEquals(LoadiumSessionStatus.INITIALIZING, response.getSession().getSessionStatus());
     }
 }
