@@ -64,6 +64,5 @@ public class LoadiumServiceTest {
         Assert.assertNotNull(response.getSession().getSessionKey());
         Assert.assertNotNull(response.getSession().getTestKey());
         Assert.assertEquals(testKey, response.getSession().getTestKey());
-        Assert.assertEquals(LoadiumSessionStatus.INITIALIZING, response.getSession().getSessionStatus());
     }
 }
