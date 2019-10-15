@@ -5,6 +5,7 @@ import com.loadium.jenkins.loadium.model.enums.LoadiumSessionStatus;
 import com.loadium.jenkins.loadium.model.enums.ServiceType;
 import com.loadium.jenkins.loadium.model.response.LoadiumRunningSessionResponse;
 import com.loadium.jenkins.loadium.model.response.StartSessionResponse;
+import com.loadium.jenkins.loadium.services.AuthService;
 import com.loadium.jenkins.loadium.services.LoadiumService;
 import com.loadium.jenkins.loadium.services.ServiceFactory;
 import com.loadium.jenkins.loadium.util.EnvironmentUtil;
@@ -28,6 +29,7 @@ import java.util.Calendar;
 public class LoadiumBuild implements Callable<Result, Exception> {
 
     public final static LoadiumService loadiumService = (LoadiumService) ServiceFactory.getService(ServiceType.LOADIUM);
+    private final static AuthService authService = (AuthService) ServiceFactory.getService(ServiceType.AUTH);
     private final static int DELAY = 30000;
     private final static int LAST_PRINT = 0;
 
@@ -61,7 +63,8 @@ public class LoadiumBuild implements Callable<Result, Exception> {
         logEntry.setLength(LAST_PRINT);
         logEntry.append(String.format("Timestamp: %s", Calendar.getInstance().getTime().toString()));
         logEntry.setLength(LAST_PRINT);
-
+        String token = authService.getAuthToken(credentialModelDTO.getUsername(), String.valueOf(credentialModelDTO.getPassword()));
+        loadiumService.setToken(token);
         try {
 
             StartSessionResponse startSessionResponse = loadiumService.startSession(this.getTestId());

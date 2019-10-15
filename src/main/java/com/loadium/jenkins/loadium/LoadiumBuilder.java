@@ -66,7 +66,6 @@ public class LoadiumBuilder extends Builder {
             try {
                 CredentialModelDTO credentialModelDTO = CredentialsUtil.getCredentialByCredentialId(getCredentialsId());
                 token = authService.getAuthToken(credentialModelDTO.getUsername(), String.valueOf(credentialModelDTO.getPassword()));
-
                 if (token != null) {
                     VirtualChannel c = launcher.getChannel();
                     LoadiumBuild loadiumBuild = new LoadiumBuild();
@@ -174,11 +173,11 @@ public class LoadiumBuilder extends Builder {
 
             try {
                 token = authService.getAuthToken(credential.getUsername(), Secret.toString(credential.getPassword()));
-                if (token != null) {
+                if (token == null) {
                     items.add("User Validation Eror", "-1");
                     return items;
                 }
-
+                loadiumService.setToken(token);
                 List<LoadiumTestBasicDetailsDTO> detailsDTOS = loadiumService.getTests();
                 if (detailsDTOS == null) {
                     items.add("Credential is not valid", "-1");
@@ -192,10 +191,8 @@ public class LoadiumBuilder extends Builder {
             } catch (Exception e) {
                 throw FormValidation.error(e.getMessage(), e);
             }
-
             Comparator c = (Comparator<ListBoxModel.Option>) (o1, o2) -> o1.name.compareToIgnoreCase(o2.name);
             Collections.sort(items, c);
-
             return items;
         }
 

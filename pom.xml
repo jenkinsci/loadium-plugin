@@ -136,10 +136,7 @@
             <artifactId>rest-assured</artifactId>
             <version>4.0.0</version>
             <exclusions>
-                <exclusion>
-                    <artifactId>commons-lang3</artifactId>
-                    <groupId>org.apache.commons</groupId>
-                </exclusion>
+
                 <exclusion>
                     <artifactId>hamcrest-core</artifactId>
                     <groupId>org.hamcrest</groupId>
