@@ -11,6 +11,6 @@ public class LoadiumSessionBasicDetailsDTO {
 
     private String testKey;
     private String sessionKey;
-    private LoadiumSessionStatus sessionStatus;
+    private int sessionStatus;
 
 }
