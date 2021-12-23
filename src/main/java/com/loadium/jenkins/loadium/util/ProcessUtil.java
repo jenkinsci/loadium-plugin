@@ -24,7 +24,7 @@ public class ProcessUtil {
         while (true) {
             Thread.sleep(DELAY);
             loadiumRunningSessionResponse = loadiumService.getSessionStatus(sessionKey);
-            sessionStatus = loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus();
+            sessionStatus = LoadiumSessionStatus.fromValue(loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus());
 
             if (!sessionStatus.equals(LoadiumSessionStatus.STARTED)) {
                 loadiumLog.getLogger().print("Loadium for session key " + sessionKey.substring(0, 10) + " is finishing build... ");
@@ -51,10 +51,15 @@ public class ProcessUtil {
         while (true) {
             Thread.sleep(DELAY);
             loadiumRunningSessionResponse = loadiumService.getSessionStatus(sessionKey);
-            sessionStatus = loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus();
+            sessionStatus = LoadiumSessionStatus.fromValue(loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus());
 
             if (sessionStatus.equals(LoadiumSessionStatus.FINISHED)) {
                 loadiumLog.getLogger().print("Loadium Session is being stopped on Loadium APi");
+                break;
+            }
+
+            if (sessionStatus.equals(LoadiumSessionStatus.FAILED)) {
+                loadiumLog.getLogger().print("Loadium Session is failed.");
                 break;
             }
         }

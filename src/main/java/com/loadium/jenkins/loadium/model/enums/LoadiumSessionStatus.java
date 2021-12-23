@@ -1,6 +1,8 @@
 package com.loadium.jenkins.loadium.model.enums;
 
 
+import java.util.Arrays;
+
 public enum LoadiumSessionStatus {
 
     FAILED(-1),
@@ -19,4 +21,7 @@ public enum LoadiumSessionStatus {
         return this.status;
     }
 
+    public static LoadiumSessionStatus fromValue(final int val) {
+        return Arrays.stream(values()).filter(value -> value.getStatus() == val).findFirst().orElse(null);
+    }
 }

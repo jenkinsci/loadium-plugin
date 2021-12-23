@@ -50,7 +50,7 @@ public class RestUtil {
         if (response.getStatusCode() != 200) {
             log.info("postResourceRestCall");
             log.info("Response Code : " + response.getStatusCode());
-            throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()));
+            throw new RuntimeException("An unknown error has occurred in attempting to connect the Api :" + String.valueOf(response.getStatusLine()) + "Error message:" + response.getBody().prettyPrint());
         }
 
         return response.getBody().prettyPrint();

@@ -72,6 +72,7 @@ public class LoadiumBuilder extends Builder {
                     loadiumBuild.setCredentialModelDTO(credentialModelDTO);
                     loadiumBuild.setTestId(getTestId());
                     loadiumBuild.setListener(listener);
+                    assert c != null;
                     result = c.call(loadiumBuild);
                     build.setResult(result);
 
@@ -178,7 +179,7 @@ public class LoadiumBuilder extends Builder {
                     return items;
                 }
                 loadiumService.setToken(token);
-                List<LoadiumTestBasicDetailsDTO> detailsDTOS = loadiumService.getTests();
+                List<LoadiumTestBasicDetailsDTO> detailsDTOS = loadiumService.getTests(credential.getUsername());
                 if (detailsDTOS == null) {
                     items.add("Credential is not valid", "-1");
                 } else if (detailsDTOS.isEmpty()) {

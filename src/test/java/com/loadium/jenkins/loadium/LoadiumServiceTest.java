@@ -1,6 +1,7 @@
 package com.loadium.jenkins.loadium;
 
 import com.loadium.jenkins.loadium.model.dto.LoadiumTestBasicDetailsDTO;
+import com.loadium.jenkins.loadium.model.enums.LoadiumSessionStatus;
 import com.loadium.jenkins.loadium.model.enums.ServiceType;
 import com.loadium.jenkins.loadium.model.response.StartSessionResponse;
 import com.loadium.jenkins.loadium.services.AuthService;
@@ -17,10 +18,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 
 public class LoadiumServiceTest {
-    private final String testType = "HTTP";
-    private final String testKey = "h41v4ki5quda59fmdhp233rkchgi1gub";
+    private final String testType = "JMX";
+    private final String testKey = "qqem81901go2k1d286eva09ttf6fv9vc";
     private final String testName = "loadium-jenkins";
-    private final String owner = "jenkins-user@loadium.io";
+    private final String owner = "bilaldem@outlook.com.tr";
 
     private static String token;
     private static LoadiumService loadiumService;
@@ -37,7 +38,7 @@ public class LoadiumServiceTest {
 
     @Test
     public void getTestsTest() throws Exception {
-        List<LoadiumTestBasicDetailsDTO> tests = loadiumService.getTests();
+        List<LoadiumTestBasicDetailsDTO> tests = loadiumService.getTests("bilaldem@outlook.com.tr");
 
         Assert.assertNotNull(tests);
         assertThat(tests, hasSize(1));
@@ -63,6 +64,6 @@ public class LoadiumServiceTest {
         Assert.assertNotNull(response.getSession().getSessionKey());
         Assert.assertNotNull(response.getSession().getTestKey());
         Assert.assertEquals(testKey, response.getSession().getTestKey());
-        Assert.assertEquals("SUCCESS", response.getSession().getSessionStatus());
+        Assert.assertEquals(LoadiumSessionStatus.STARTED.getStatus(), response.getSession().getSessionStatus());
     }
 }

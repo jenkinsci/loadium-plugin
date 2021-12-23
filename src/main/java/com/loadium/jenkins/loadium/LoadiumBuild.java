@@ -77,31 +77,35 @@ public class LoadiumBuild implements Callable<Result, Exception> {
             this.listener.getLogger().println(logEntry.toString());
             logEntry.setLength(LAST_PRINT);
 
-            while (true) {
+            boolean listen = true;
+            while (listen) {
                 Thread.sleep(DELAY);
                 loadiumRunningSessionResponse = loadiumService.getSessionStatus(sessionKey);
 
-                if (loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus().equals(LoadiumSessionStatus.STARTED)) {
-                    publicReportURL = EnvironmentUtil.getInstance().getPublicReportURL(this.getTestId(), sessionKey);
-                    logEntry.append(String.format("Loadium Test Report : %s", publicReportURL));
-                    this.listener.getLogger().println(logEntry.toString());
-                    logEntry.setLength(LAST_PRINT);
-                    break;
+                switch (LoadiumSessionStatus.fromValue(loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus())) {
+                    case STARTED:
+                        publicReportURL = EnvironmentUtil.getInstance().getPublicReportURL(this.getTestId(), sessionKey);
+                        logEntry.append(String.format("Loadium Test Report : %s", publicReportURL));
+                        this.listener.getLogger().println(logEntry.toString());
+                        logEntry.setLength(LAST_PRINT);
+                        listen = false;
+                        break;
+                    case FAILED:
+                        result = Result.FAILURE;
+                        listen = false;
+                        break;
+                    case FINISHED:
+                        publicReportURL = EnvironmentUtil.getInstance().getPublicReportURL(this.getTestId(), sessionKey);
+                        logEntry.append(String.format("Loadium Test Report :  %s", publicReportURL));
+                        this.listener.getLogger().println(logEntry.toString());
+                        logEntry.setLength(LAST_PRINT);
+                        result = Result.SUCCESS;
+                        listen = false;
+                        break;
+                    default:
+                        break;
                 }
-
-                if (loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus().equals(LoadiumSessionStatus.FAILED)) {
-                    result = Result.FAILURE;
-                    break;
-                }
-
-                if (loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus().equals(LoadiumSessionStatus.FINISHED)) {
-                    publicReportURL = EnvironmentUtil.getInstance().getPublicReportURL(this.getTestId(), sessionKey);
-                    logEntry.append(String.format("Loadium Test Report :  %s", publicReportURL));
-                    this.listener.getLogger().println(logEntry.toString());
-                    logEntry.setLength(LAST_PRINT);
-                    result = Result.SUCCESS;
-                    break;
-                }
+                if (!listen) break;
 
                 if (Thread.interrupted()) {
                     throw new InterruptedException("Job was stopped by user on Jenkins");
@@ -111,11 +115,11 @@ public class LoadiumBuild implements Callable<Result, Exception> {
             ProcessUtil.sessionStartedProgress(sessionKey, this.listener);
             loadiumRunningSessionResponse = loadiumService.getSessionStatus(sessionKey);
 
-            if (loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus().equals(LoadiumSessionStatus.FAILED)) {
+            if (LoadiumSessionStatus.FAILED.getStatus() == loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus()) {
                 result = Result.FAILURE;
             }
 
-            if (loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus().equals(LoadiumSessionStatus.FINISHED)) {
+            if (LoadiumSessionStatus.FINISHED.getStatus() == loadiumRunningSessionResponse.getLoadiumSessionBasicDetailsDTO().getSessionStatus()) {
                 result = Result.SUCCESS;
             }
 
@@ -142,16 +146,9 @@ public class LoadiumBuild implements Callable<Result, Exception> {
 
         } finally {
             if (!StringUtils.isBlank(sessionKey)) {
-                /*
-                    Finally durumunda Session'ı her turlu kapatmalıyız. Zaten Bitmis de olabilir.
-                    Bu yuzden sessionEndedProggress Method'u kapatma istegi gonderirken 500 alabilir.
-                 */
                 ProcessUtil.sessionEndedProgress(sessionKey, this.getTestId(), this.listener);
 
-                /*
-                    Session'ın Loadium arayüzünden kapanma ihtimali ne karsılık tekrar bir status kontrolu yapmalıyız.
-                 */
-                if (LoadiumSessionStatus.STARTED.equals(loadiumService.getSessionStatus(sessionKey).getLoadiumSessionBasicDetailsDTO().getSessionStatus())) {
+                if (LoadiumSessionStatus.STARTED.getStatus() == loadiumService.getSessionStatus(sessionKey).getLoadiumSessionBasicDetailsDTO().getSessionStatus()) {
                     ProcessUtil.sessionEndedProgress(sessionKey, this.getTestId(), this.listener);
                 }
 

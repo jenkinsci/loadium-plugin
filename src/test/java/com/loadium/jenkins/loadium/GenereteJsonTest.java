@@ -28,7 +28,7 @@ public class GenereteJsonTest {
         LoadiumSessionBasicDetailsDTO loadiumSessionBasicDetailsDTO = new LoadiumSessionBasicDetailsDTO();
         loadiumSessionBasicDetailsDTO.setSessionKey("bklre7u87n3ph4ah660g12bpvs62qewq");
         loadiumSessionBasicDetailsDTO.setTestKey("bklre7u87n3ph4ah660g12bpvs62qewq");
-        loadiumSessionBasicDetailsDTO.setSessionStatus(LoadiumSessionStatus.STARTED);
+        loadiumSessionBasicDetailsDTO.setSessionStatus(LoadiumSessionStatus.STARTED.getStatus());
 
         startSessionResponse.setStatus("SUCCES");
         startSessionResponse.setSession(loadiumSessionBasicDetailsDTO);
@@ -75,7 +75,7 @@ public class GenereteJsonTest {
         loadiumRunningSessionResponse.setStatus("SUCCES");
 
         LoadiumSessionBasicDetailsDTO loadiumSessionBasicDetailsDTO = new LoadiumSessionBasicDetailsDTO();
-        loadiumSessionBasicDetailsDTO.setSessionStatus(LoadiumSessionStatus.STARTED);
+        loadiumSessionBasicDetailsDTO.setSessionStatus(LoadiumSessionStatus.STARTED.getStatus());
         loadiumSessionBasicDetailsDTO.setTestKey("vvdsa7u87n3ph4ah660g12bpvs62qewq");
         loadiumSessionBasicDetailsDTO.setSessionKey("bklre7u87n3ph4ah660g12bpvs62qewq");
 
