@@ -1,16 +1,7 @@
 package com.loadium.jenkins.loadium.model.dto;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Date;
 
-@Data
-@NoArgsConstructor
-@SuppressFBWarnings(value = { "EI_EXPOSE_REP", "EI_EXPOSE_REP2" }, justification = "I prefer to suppress these FindBugs warnings")
 public class LoadiumTestBasicDetailsDTO {
     private String testKey;
     private String testName;
@@ -20,4 +11,82 @@ public class LoadiumTestBasicDetailsDTO {
     private String owner;
     private String projectName;
     private Boolean dedicatedIPUsed;
+
+    public Date getCreatedTime() {
+        return new Date(createdTime.getTime());
+    }
+
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = new Date(createdTime.getTime());
+    }
+
+    public String getTestKey() {
+        return testKey;
+    }
+
+    public void setTestKey(String testKey) {
+        this.testKey = testKey;
+    }
+
+    public String getTestName() {
+        return testName;
+    }
+
+    public void setTestName(String testName) {
+        this.testName = testName;
+    }
+
+    public Boolean getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        this.favorite = favorite;
+    }
+
+    public String getTestType() {
+        return testType;
+    }
+
+    public void setTestType(String testType) {
+        this.testType = testType;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public Boolean getDedicatedIPUsed() {
+        return dedicatedIPUsed;
+    }
+
+    public void setDedicatedIPUsed(Boolean dedicatedIPUsed) {
+        this.dedicatedIPUsed = dedicatedIPUsed;
+    }
+
+    @Override
+    public String toString() {
+        return "LoadiumTestBasicDetailsDTO{" +
+                "testKey='" + testKey + '\'' +
+                ", testName='" + testName + '\'' +
+                ", createdTime=" + createdTime +
+                ", favorite=" + favorite +
+                ", testType='" + testType + '\'' +
+                ", owner='" + owner + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", dedicatedIPUsed=" + dedicatedIPUsed +
+                '}';
+    }
 }

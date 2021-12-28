@@ -22,9 +22,9 @@ public class LoadiumService implements Service {
     private String token;
 
 
-    public List<LoadiumTestBasicDetailsDTO> getTests() throws Exception {
+    public List<LoadiumTestBasicDetailsDTO> getTests(String username) throws Exception {
         RestUtil rest = new RestUtil(getToken());
-        String url = "/tests";
+        String url = "/tests?username=".concat(username);
         String result = rest.getResourceRestCall(url);
 
         ObjectMapper mapper = new ObjectMapper();
